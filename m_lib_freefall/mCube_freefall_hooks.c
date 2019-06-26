@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 /** @defgroup FREEFALL MCUBE_FREEFALL_HOOKS
- *  @{
+ *  @
  *  @author mCube
  *  @brief Hook functions for freefall algorithm.
  *  @date 16 Apr 2019
