@@ -1,4 +1,4 @@
-# DB3672
+# DB3672B ALGO sample program
 ALGO sample code for mCube MC3672 and MC3635 demo board- DB3672. We cannot guarantee ALGO performance on any specific system platform.
 
 Copyright (c) 2019 mCube, Inc.  All rights reserved.
