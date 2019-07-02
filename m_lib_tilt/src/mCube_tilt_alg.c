@@ -12,7 +12,7 @@
  *****************************************************************************/
 
 /**
- * @file    mcube_Tilt_alg.c
+ * @file    mcube_tilt_alg.c
  * @author  mCube 
  * @date    22 Mar 2019
  * @brief   main processing of Tilt detection algorithm .
