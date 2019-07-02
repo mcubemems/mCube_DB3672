@@ -12,9 +12,8 @@
  *****************************************************************************/
 
 /** @defgroup SHAKE MCUBE_SHAKE_HOOKS
- *  @{
  *  @author mCube
- *  @brief Hook functions for shake algorithm.
+ *  @brief Hook functions for shake algorithm
  *  @date 16 Apr 2019
  *  @see http://www.mcubemems.com
  *  @file mCube_shake_hooks.h
@@ -31,7 +30,7 @@ extern "C" {
  *****************************************************************************/
 #include <stdint.h>
 #include <stdbool.h>
-#include "m_drv_console.h"
+//#include "m_drv_console.h"
 /** 
  * -----------------------------------------------------------------------------
  * API declarations
