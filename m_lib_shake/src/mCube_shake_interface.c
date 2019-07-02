@@ -63,11 +63,10 @@ bool is_Shake_enable = false;
 bool mCube_Shake_OpenWithParam(mCubeShakeInit_t *initData)
 {
     shake_interface_debug = initData->s_debug;
-
     mCube_Shake_Open();
 
     if (is_Shake_enable)
-	{
+    {
         ShakeParam_Input.s_debug =
             initData->s_debug;
         ShakeParam_Input.Shaking_STD_THR =
@@ -80,7 +79,6 @@ bool mCube_Shake_OpenWithParam(mCubeShakeInit_t *initData)
         mCube_Shake_ParamUpdate(ShakeParam_Input);
         //m_lib_printf("Library configured.");
     }
-
     return is_Shake_enable;
 }
 
@@ -93,7 +91,8 @@ bool mCube_Shake_OpenWithParam(mCubeShakeInit_t *initData)
  */
 bool mCube_Shake_Open(void)
 {
-    if(!is_Shake_enable) {
+    if(!is_Shake_enable)
+    {
         is_Shake_enable = true; 
         //m_lib_printf("Shake_lib Ready. \r\n");
     }
@@ -144,7 +143,6 @@ bool mCube_Shake_ProcessData(short Acc1_X, short Acc1_Y, short Acc1_Z)
         return false;
 
     Shaking_ProcessData(Acc1_X, Acc1_Y, Acc1_Z);
-
     return true;
 }
 
