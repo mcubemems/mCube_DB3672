@@ -12,10 +12,10 @@
  *****************************************************************************/
 
 /**
- * @file    m_lib_freefall_interface.c
+ * @file    mCube_freefall_interface.c
  * @author  mCube
  * @date    16 Apr 2019
- * @brief   Library interface for freefall algorithm.
+ * @brief   Library interface for freefall algorithm
  * @see     http://www.mcubemems.com
  */
 
@@ -30,7 +30,6 @@
 #define M_LIB_FREEFALL_VERSION_INTERFACE_MAJOR                 2
 #define M_LIB_FREEFALL_VERSION_INTERFACE_MINOR                 0
 #define M_LIB_FREEFALL_VERSION_INTERFACE_BUILD                 0
-//Update new authenticate structure
 
 /******************************************************************************
  *** INCLUDE FILES
@@ -71,7 +70,8 @@ bool mCube_Freefall_OpenWithParam(mCubeFreefallInit_t *initData)
 
     mCube_Freefall_Open();
 
-    if (is_Freefall_enable) {
+    if (is_Freefall_enable) 
+    {
         FreefallParam_Input.s_debug =
             initData->s_debug;
         FreefallParam_Input.FallCounts_THR =
@@ -80,7 +80,7 @@ bool mCube_Freefall_OpenWithParam(mCubeFreefallInit_t *initData)
             initData->FallPower_THR;
 
         mCube_Freefall_ParamUpdate(FreefallParam_Input);
-        m_lib_printf("Library configured.");
+        //m_lib_printf("Library configured.");
     }
 
     return is_Freefall_enable;
@@ -95,13 +95,12 @@ bool mCube_Freefall_OpenWithParam(mCubeFreefallInit_t *initData)
  */
 bool mCube_Freefall_Open(void)
 {
-    m_lib_printf("mCube freefall library version %x. : ", mCube_Freefall_GetVersion());
-
-    if(!is_Freefall_enable) {
+    //m_lib_printf("mCube freefall library version %x. : ", mCube_Freefall_GetVersion());
+    if(!is_Freefall_enable)
+    {
         is_Freefall_enable = true; 
-        m_lib_printf("Freefall_lib Ready. \r\n");
+        //m_lib_printf("Freefall_lib Ready. \r\n");
     }
-
     return is_Freefall_enable;
 }
 
