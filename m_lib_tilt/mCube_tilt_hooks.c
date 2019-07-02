@@ -67,13 +67,13 @@ void mCube_Tilt_onstatechange(float Roll_val, float Pitch_val,float *AccSensor)
     else
         sprintf(str_l2, " Roll  =  %c%d.%d", pitch_data_direction, pitch_data_characteristic/10, pitch_data_characteristic%10);
 
-    if (fabs(AccSensor[0]) > 500/2 && fabs(Pitch_val) > 30.0f) // Turn on LED when pitch goes over abs(30.0 degreee)
+    if (fabs(Pitch_val) > 30.0f) // Turn on LED when pitch goes over abs(30.0 degreee)
     {
         //am_util_stdio_printf("tilt angle(degree) %4.6f with Y Axis \r\n", Pitch_val ); 
         am_hal_gpio_out_bit_replace(PIN_LED_Y_CTRL, 0x1); //HW GPIO pinout setting to control LED
     }     
 
-    if ( fabs(AccSensor[1]) > 500/2 && fabs(Roll_val) > 30.0f) // Turn on LED when roll goes over abs(30.0 degreee)
+    if (fabs(Roll_val) > 30.0f) // Turn on LED when roll goes over abs(30.0 degreee)
     {
         ///am_util_stdio_printf("tilt angle(degree) %4.6f with X Axis \r\n",Roll_val );
         am_hal_gpio_out_bit_replace(PIN_LED_G_CTRL, 0x1);  //HW GPIO pinout setting to control LED    
