@@ -31,7 +31,6 @@ extern "C" {
  *****************************************************************************/
 #include <stdint.h>
 #include <stdbool.h>
-#include "m_drv_console.h"
 
 /******************************************************************************
  *** DATA TYPE / STRUCTURE DEFINITION / ENUM
