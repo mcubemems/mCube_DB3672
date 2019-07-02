@@ -19,8 +19,6 @@
  * @see     http://www.mcubemems.com
  */
 
-
-
 #include "mCube_shake_alg.h"
 #include "mCube_shake_hooks.h"
 
@@ -64,9 +62,9 @@ uint8_t wait_time = 2;
 bool mCube_Shake_ParamUpdate(mCubeShakeInit_t initData)
 {
     Shake_external_debug =  initData.s_debug;
-    Shaking_STD_THR  =  (uint32_t)initData.Shaking_STD_THR*10000;
-    ShakeCounsTHR =  initData.ShakeCounsTHR;        
-    wait_time =  initData.wait_time; 
+    Shaking_STD_THR = (uint32_t)initData.Shaking_STD_THR*10000;
+    ShakeCounsTHR = initData.ShakeCounsTHR;        
+    wait_time = initData.wait_time; 
     Shaking_STD_peak = Shaking_STD_THR;                 
     Shaking_STD_valley = Shaking_STD_THR/2; 
 
@@ -97,8 +95,7 @@ void LPF_10Hz_Fs100Hz_Acc (short *input)
     uint8_t i=0;
 
     for (i=0; i<3; i++)
-	{
-
+    {
         xv[0][i] = xv[1][i];
         xv[1][i] = xv[2][i];
         xv[2][i] = xv[3][i];
@@ -144,34 +141,33 @@ void Shaking_Detection3(short ax, short ay, short az)
     AccSensor1[0]=ax;
     AccSensor1[1]=ay;
     AccSensor1[2]=az;   //set data as 1g=256 count
-
     LPF_10Hz_Fs100Hz_Acc(AccSensor1) ;
 
-
     for ( i=0; i<3; i++)
-	{
+    {
         xyzMean[i] = (n-1)*xyzMean[i]/n +  AccSensor1[i]/n;
-        xyzVariance[i] = ((n-2)*xyzVariance[i] + n*(AccSensor1[i]-xyzMean[i])*(AccSensor1[i]-xyzMean[i])/(n-1))/(n-1)  ;
+        xyzVariance[i] = ((n-2)*xyzVariance[i] + n*(AccSensor1[i]-xyzMean[i])*(AccSensor1[i]-xyzMean[i])/(n-1))/(n-1);
     }
 
     STD = xyzVariance[0] + xyzVariance[1] + xyzVariance[2];
 
-    while (Shaking_STD_status ==1  && STD>Shaking_STD_peak)
+    while (Shaking_STD_status == 1 && STD > Shaking_STD_peak)
     {
         Shaking_STD_peak = STD;
         break;
     }
 
-    while (Shaking_STD_status ==0  && STD<Shaking_STD_valley)
+    while (Shaking_STD_status == 0 && STD < Shaking_STD_valley)
     {
         Shaking_STD_valley = STD;
         break;
     }
 
-    if(STD>=Shaking_STD_THR  && STD>(Shaking_STD_valley*3>>1) && Shaking_trigger==false )
+    if(STD >= Shaking_STD_THR && STD > (Shaking_STD_valley*3>>1) && Shaking_trigger == false)
     {
         QuickCounts++ ;
-        while (Shaking_STD_status==0){                 
+        while (Shaking_STD_status==0)
+	{                 
             Shaking_STD_status = 1;                      
             Shaking_STD_valley = Shaking_STD_THR/2 ;    
             QuickCounts = 1;
@@ -179,7 +175,7 @@ void Shaking_Detection3(short ax, short ay, short az)
         }
     }
 
-    if (STD< (Shaking_STD_peak*7)/10 && Shaking_trigger==false && Shaking_STD_status==1)
+    if (STD < (Shaking_STD_peak*7)/10 && Shaking_trigger == false && Shaking_STD_status == 1)
     {
         Shaking_STD_status = 0;                           
         Shaking_STD_peak = Shaking_STD_THR  ;          
@@ -189,9 +185,9 @@ void Shaking_Detection3(short ax, short ay, short az)
         trigger_timer = Shaking_ODR*wait_time; 
     }
 
-    if ( ((peak_counts==ShakeCounsTHR)||(QuickCounts> Shaking_ODR)) && Shaking_trigger==false)
-	{    
-        Shaking_trigger=true;
+    if ( ((peak_counts == ShakeCounsTHR)||(QuickCounts > Shaking_ODR)) && Shaking_trigger == false)
+    {    
+        Shaking_trigger = true;
         mcube_shake_onstatechange(Shaking_trigger);
         QuickCounts = 0;     // init
         peak_counts = 0;     // init
@@ -200,13 +196,13 @@ void Shaking_Detection3(short ax, short ay, short az)
     }
 
     if(trigger_timer!=0)
-	{
+    {
         trigger_timer--;
         if (trigger_timer ==0)
-		{
+	{
             peak_counts = 0;
             QuickCounts = 0;
-            Shaking_trigger=false;
+            Shaking_trigger = false;
             Shaking_STD_peak = Shaking_STD_THR;
         }
     }
@@ -226,15 +222,16 @@ bool Shaking_ProcessData(short ax, short ay, short az)
 {
     static uint32_t timeindex_shake = 0;
 
-    if( timeindex_shake%1==0)
-	{
-        ax = ax>>3; ay = ay>>3; az = az>>3;    //  set data as 1g=256 count 
+    if( timeindex_shake%1 == 0)
+    {
+        ax = ax >> 3;
+	ay = ay >> 3;
+	az = az >> 3;    //  set data as 1g=256 count 
         Shaking_Detection3(ax, ay, az) ;
     }
 
     timeindex_shake++;
-
-    if (timeindex_shake==65530)
+    if (timeindex_shake == 65530)
         timeindex_shake = 0;
 
     return true;
