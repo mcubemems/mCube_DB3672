@@ -12,10 +12,10 @@
  *****************************************************************************/
 
 /**
- * @file    mcube_tilt_hooks.c
+ * @file    mCube_tilt_hooks.c
  * @author  mCube
  * @date    22 Mar 2019
- * @brief   
+ * @brief   Tilt angle on pitch and roll
  * @see     http://www.mcubemems.com
  */
 
@@ -48,36 +48,34 @@ void mCube_Tilt_onstatechange(float Roll_val, float Pitch_val,float *AccSensor)
     else
         roll_data_direction = '-';
     
-	roll_data_characteristic = (int)(fabs(Roll_val)*10);
+    roll_data_characteristic = (int)(fabs(Roll_val)*10);
     
-	if (roll_data_characteristic>99)
+    if (roll_data_characteristic > 99)
         sprintf(str_l1, " Pitch = %c%d.%d", roll_data_direction, roll_data_characteristic/10, roll_data_characteristic%10);
     else
-        sprintf(str_l1, " Pitch =  %c%d.%d", roll_data_direction, roll_data_characteristic/10, roll_data_characteristic%10);
+        sprintf(str_l1, " Pitch = %c%d.%d", roll_data_direction, roll_data_characteristic/10, roll_data_characteristic%10);
 	
     if (Pitch_val > -0.1)
         pitch_data_direction = 0x20;
     else
         pitch_data_direction = '-';
     
-	pitch_data_characteristic = (int)(fabs(Pitch_val)*10);
+    pitch_data_characteristic = (int)(fabs(Pitch_val)*10);
     
-	if (pitch_data_characteristic>99)
+    if (pitch_data_characteristic > 99)
         sprintf(str_l2, " Roll  = %c%d.%d", pitch_data_direction, pitch_data_characteristic/10, pitch_data_characteristic%10);
     else
         sprintf(str_l2, " Roll  =  %c%d.%d", pitch_data_direction, pitch_data_characteristic/10, pitch_data_characteristic%10);
 
-    if ( fabs(AccSensor[0]) >500/2 && fabs(Pitch_val)>30.0f)
-	{
+    if (fabs(AccSensor[0]) > 500/2 && fabs(Pitch_val) > 30.0f) // Turn on LED when pitch goes over abs(30.0 degreee)
+    {
         //am_util_stdio_printf("tilt angle(degree) %4.6f with Y Axis \r\n", Pitch_val ); 
-        am_hal_gpio_out_bit_replace(PIN_LED_Y_CTRL, 0x1); 
+        am_hal_gpio_out_bit_replace(PIN_LED_Y_CTRL, 0x1); //HW GPIO pinout setting to control LED
     }     
 
-    if ( fabs(AccSensor[1]) >500/2 && fabs(Roll_val)>30.0f)
-	{
+    if ( fabs(AccSensor[1]) > 500/2 && fabs(Roll_val) > 30.0f) // Turn on LED when roll goes over abs(30.0 degreee)
+    {
         ///am_util_stdio_printf("tilt angle(degree) %4.6f with X Axis \r\n",Roll_val );
-        am_hal_gpio_out_bit_replace(PIN_LED_G_CTRL, 0x1);     
+        am_hal_gpio_out_bit_replace(PIN_LED_G_CTRL, 0x1);  //HW GPIO pinout setting to control LED    
     } 
 }
-
-
