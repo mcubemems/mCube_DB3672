@@ -12,10 +12,10 @@
  *****************************************************************************/
 
 /**
- * @file    m_lib_freefall_ALG.c
+ * @file    mCube_freefall_alg.c
  * @author  mCube
  * @date    16 Apr 2019
- * @brief   main processing offreefall algorithm.
+ * @brief   main processing on freefall algorithm
  * @see     http://www.mcubemems.com
  */
 
@@ -64,21 +64,17 @@ int32_t sqrtI2I( int32_t v ) ;
  */ 
 void mCube_Freefall_ParamUpdate(mCubeFreefallInit_t initData)
 {
-    Freefall_external_debug =  initData.s_debug;
+    Freefall_external_debug = initData.s_debug;
 
     FallCounts_THR = initData.FallCounts_THR;
     FallPower_THR = initData.FallPower_THR;
 
     m_lib_external_printf("===============Get info. of used params in mCube Freefall library============= \r\n");
-
     m_lib_external_printf("FallCounts_THR : %d  FallPower_THR = %d \r\n", FallCounts_THR, FallPower_THR);
 }
 
-
 void mCube_FreeFall_initialize(void){
-
 }
-
 
 /**
  *  \brief Freefall detection
@@ -93,31 +89,32 @@ void mCube_FreeFall_initialize(void){
 void FreeFall_Detection(short ax, short ay, short az){
 
     static uint8_t fall_counts = 0;
-
     uint32_t power =sqrtI2I(ax*ax+ay*ay+az*az);
 
     if(power<=FallPower_THR  && FreeFall_status ==0)
-        FreeFall_status =1;  // detect potential freefall event
+        FreeFall_status = 1;  // detect potential freefall event
 
-    if (FreeFall_status==1)
+    if (FreeFall_status == 1)
     {
-        if(power<=FallPower_THR ){
-            fall_counts+=1;
+        if(power<=FallPower_THR )
+        {
+            fall_counts += 1;
             m_lib_external_printf("%d th count, power = %d,  \r\n",fall_counts, power );
-        }else{   // init all variable used to detect free fall
-            fall_counts=0;
-            FreeFall_status =0;
-            FallDown_Flag=0;
+        }
+        else // init all variable used to detect free fall
+        {   
+            fall_counts = 0;
+            FreeFall_status = 0;
+            FallDown_Flag = 0;
         }
     }
 
-    if(fall_counts>=FallCounts_THR)
+    if (fall_counts>=FallCounts_THR)
     {
-        FallDown_Flag=1;
+        FallDown_Flag = 1;
         mcube_freefall_onstatechange(FallDown_Flag); // send free fall event flag
     }
 }
-
 
  /**
  *  \brief freefall algo main code
@@ -132,7 +129,9 @@ void FreeFall_Detection(short ax, short ay, short az){
 bool FreeFall_ProcessData(short ax, short ay, short az)
 {
     short AccSensor1[3];
-    AccSensor1[0] = ax;      AccSensor1[1] = ay;    AccSensor1[2] = az;
+    AccSensor1[0] = ax;
+    AccSensor1[1] = ay;
+    AccSensor1[2] = az;
 
     // set sensor data as 1g =1024 count
     FreeFall_Detection(AccSensor1[0]>>1, AccSensor1[1]>>1, AccSensor1[2]>>1);
@@ -146,7 +145,7 @@ bool FreeFall_ProcessData(short ax, short ay, short az)
  *  \param [in] v input value
  *  \return square root of input value
  *  
- *  \details More details
+ *  \details N/A
  */
 int32_t sqrtI2I( int32_t v )
 {
