@@ -10,15 +10,13 @@
  *
  * All other rights reserved.
  *****************************************************************************/
-
-/** @defgroup SHAKE MCUBE_SHAKE_HOOKS
- *  @author mCube
- *  @brief Hook functions for shake algorithm
- *  @date 16 Apr 2019
- *  @see http://www.mcubemems.com
- *  @file mCube_shake_hooks.h
+/**
+ * @file    mCube_shake_hooks.h
+ * @author  mCube
+ * @date    16 Apr 2019
+ * @brief   Hook functions for shake algorithm
+ * @see     http://www.mcubemems.com
  */
-
 #ifndef __MCUBE_LIB_SHAKE_HOOKS_H__
 #define __MCUBE_LIB_SHAKE_HOOKS_H__
 
