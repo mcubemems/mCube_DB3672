@@ -9,7 +9,7 @@ extern "C" {
  *****************************************************************************/
 #include <stdint.h>
 #include <stdbool.h>
-#include "m_drv_console.h"
+//#include "m_drv_console.h"
 #include "mCube_freefall_interface.h"
 
 void mCube_Freefall_ParamUpdate(mCubeFreefallInit_t initData);
