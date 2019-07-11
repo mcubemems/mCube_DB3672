@@ -1,6 +1,4 @@
 # DB3672B ALGO sample program
-ALGO sample codes for mCube MC3672 and MC3635 Accel on demo board- DB3672B CANNOT be guaranteed to performance on any specific system platform. Also, some specific functions on print or HW GPIO control are platform dependent, please adopt to your related functions on platform.
-
 Copyright (C) 2019 mCube, Inc. - All rights reserved
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 -Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
